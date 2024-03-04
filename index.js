@@ -18,4 +18,13 @@ function add() {
     renderList(list);
 }
 
-renderList(list);
+function onKeyDown(event) {
+    const keyCode = event.keyCode;
+    if (keyCode === 13) {
+        add();
+    }
+}
+
+const input = document.getElementsByClassName('input')[0];
+input.addEventListener('keydown', onKeyDown);
+renderList(list); 
