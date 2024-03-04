@@ -6,9 +6,9 @@ function renderList(list) {
     let result = '';
     for (let index = 0; index < list.length; index++) {
         const element = list[index];
-        result = result + '<li>' + element + '</li>';
+        result = result + '<li class="list-group-item">' + '<input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">' + element + '</li>';
     }
-    result = '<ul>' + result + '</ul>';
+    result = '<ul class="list-group">' + result + '</ul>';
     div.innerHTML = result;
 }
 
