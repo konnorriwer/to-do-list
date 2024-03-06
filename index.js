@@ -6,7 +6,14 @@ function renderList(list) {
     let result = '';
     for (let index = 0; index < list.length; index++) {
         const element = list[index];
-        result = result + '<li class="list-group-item">' + '<input class="form-check-input me-1" type="checkbox" value="" id="firstCheckbox">' + element + '</li>';
+        result += `
+        <div class="input-group mb-3">
+             <span class="input-group-text">
+                <input class="form-check-input" type="checkbox" value="">
+             </span>
+             <input type="text" class="form-control" value="${element}" disabled>
+             <button class="btn btn-outline-danger" type="button">Удалить</button>
+        </div>`;
     }
     result = '<ul class="list-group">' + result + '</ul>';
     div.innerHTML = result;
