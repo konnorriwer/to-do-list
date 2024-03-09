@@ -1,4 +1,4 @@
-const list = ['накормить кота', 'помыть посуду'];
+let list = ['накормить кота', 'помыть посуду'];
 
 
 function renderList(list) {
@@ -30,6 +30,11 @@ function onKeyDown(event) {
     if (keyCode === 13) {
         add();
     }
+}
+
+function clearList() {
+    list = [];
+    renderList(list);
 }
 
 const input = document.getElementsByClassName('input')[0];
