@@ -6,36 +6,53 @@ let list = [
 
 function renderList(list) {
     const div = document.getElementsByClassName('list')[0];
-    let result = '';
-    for (let index = 0; index < list.length; index++) {
-        const element = list[index];
-        let checked = '';
-        if (element.completed) {
-            checked = 'checked';
-        }
-        result = result + `
-        <div class="input-group mb-3">
-             <span class="input-group-text">
-                <input class="form-check-input" type="checkbox" ${checked}>
-             </span>
-             <input type="text" class="form-control" value="${element.text}">
-             <button class="btn btn-outline-danger" type="button">Удалить</button>
-        </div>`;
-    }
-    result = '<ul class="list-group">' + result + '</ul>';
-    div.innerHTML = result;
+    div.innerHTML = getHtmlForList(list);
 }
 
-function add() {
+function getHtmlForList(list) {
+    let listItemsHtml = '';
+
+    for (let i = 0; i < list.length; i++) {
+        listItemsHtml = listItemsHtml + getHtmlForListItem(list[i]);
+    }
+
+    return `
+        <div class="list-group">
+            ${listItemsHtml}
+        </div>
+    `;
+}
+
+function getHtmlForListItem(item) {
+    let checkmark = '';
+    
+    if (item.completed) {
+        checkmark = 'checked';
+    }
+
+    return `
+        <div class="input-group mb-3">
+            <span class="input-group-text">
+                <input class="form-check-input" type="checkbox" ${checkmark}>
+            </span>
+            <input type="text" class="form-control" value="${item.text}">
+            <button class="btn btn-outline-danger" type="button">
+                Удалить
+            </button>
+        </div>
+    `;
+}
+
+function addListItem() {
     const text = document.getElementsByClassName('input')[0].value;
-    list.push(text);
+    list.push({text: text, completed: false});
     renderList(list);
 }
 
 function onKeyDown(event) {
     const keyCode = event.keyCode;
     if (keyCode === 13) {
-        add();
+        addListItem();
     }
 }
 
