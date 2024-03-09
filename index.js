@@ -1,4 +1,7 @@
-let list = ['накормить кота', 'помыть посуду'];
+let list = [
+    {text: 'покормить кота', completed: true},
+    {text: 'помыть посуду', completed: false},
+];
 
 
 function renderList(list) {
@@ -6,12 +9,16 @@ function renderList(list) {
     let result = '';
     for (let index = 0; index < list.length; index++) {
         const element = list[index];
-        result += `
+        let checked = '';
+        if (element.completed) {
+            checked = 'checked';
+        }
+        result = result + `
         <div class="input-group mb-3">
              <span class="input-group-text">
-                <input class="form-check-input" type="checkbox" value="">
+                <input class="form-check-input" type="checkbox" ${checked}>
              </span>
-             <input type="text" class="form-control" value="${element}" disabled>
+             <input type="text" class="form-control" value="${element.text}">
              <button class="btn btn-outline-danger" type="button">Удалить</button>
         </div>`;
     }
