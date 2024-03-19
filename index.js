@@ -13,7 +13,7 @@ function getHtmlForList(list) {
     let listItemsHtml = '';
 
     for (let i = 0; i < list.length; i++) {
-        listItemsHtml = listItemsHtml + getHtmlForListItem(list[i]);
+        listItemsHtml = listItemsHtml + getHtmlForListItem(list[i], i);
     }
 
     return `
@@ -23,7 +23,7 @@ function getHtmlForList(list) {
     `;
 }
 
-function getHtmlForListItem(item) {
+function getHtmlForListItem(item, index) {
     let checkmark = '';
     
     if (item.completed) {
@@ -36,7 +36,7 @@ function getHtmlForListItem(item) {
                 <input class="form-check-input" type="checkbox" ${checkmark}>
             </span>
             <input type="text" class="form-control" value="${item.text}">
-            <button class="btn btn-outline-danger" type="button">
+            <button class="btn btn-outline-danger" type="button" onclick="deleteItem(${index})">
                 Удалить
             </button>
         </div>
@@ -61,6 +61,10 @@ function clearList() {
     renderList(list);
 }
 
+function deleteItem(index) {
+    list.splice(index, 1);
+    renderList(list);
+}
 const input = document.getElementsByClassName('input')[0];
 input.addEventListener('keydown', onKeyDown);
 renderList(list); 
